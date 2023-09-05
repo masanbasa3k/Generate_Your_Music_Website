@@ -62,9 +62,9 @@ def generate_music(generator_model, latent_dim, n_vocab, notes, length=500):
 def create_music():
     """ Load the trained generator model and generate music """
     # Load the trained generator model
-    generator_model = load_model("model/model.h5")
+    generator_model = load_model("website/model/model.h5")
     
-    with open('model/notes.pickle', 'rb') as file:
+    with open('website/model/notes.pickle', 'rb') as file:
         notes = pickle.load(file)
     n_vocab = len(set(notes))
     
@@ -72,7 +72,7 @@ def create_music():
     generated_music = generate_music(generator_model, LATENT_DIMENSION, n_vocab, notes)
     
     # Create a MIDI file from the generated music
-    create_midi(generated_music, 'static/music')
+    create_midi(generated_music, 'website/static/music')
 
 if __name__ == '__main__':
     create_music()
