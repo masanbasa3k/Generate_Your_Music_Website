@@ -43,7 +43,7 @@ def create_midi(prediction_output, filename):
     midi_stream.write('midi', fp='{}.mid'.format(filename))
 
 
-def generate_music(generator_model, latent_dim, n_vocab, length=500):
+def generate_music(generator_model, latent_dim, n_vocab, notes, length=500):
     """ Generate new music using the trained generator model """
     # Create random noise as input to the generator
     noise = np.random.normal(0, 1, (1, latent_dim))
@@ -59,16 +59,20 @@ def generate_music(generator_model, latent_dim, n_vocab, length=500):
     
     return pred_notes_mapped[:length]
 
-if __name__ == '__main__':
+def create_music():
+    """ Load the trained generator model and generate music """
     # Load the trained generator model
-    generator_model = load_model("model.h5")
+    generator_model = load_model("model/model.h5")
     
-    with open('notes.pickle', 'rb') as file:
+    with open('model/notes.pickle', 'rb') as file:
         notes = pickle.load(file)
     n_vocab = len(set(notes))
     
     # Generate new music sequence
-    generated_music = generate_music(generator_model, LATENT_DIMENSION, n_vocab)
+    generated_music = generate_music(generator_model, LATENT_DIMENSION, n_vocab, notes)
     
     # Create a MIDI file from the generated music
-    create_midi(generated_music, 'generated_music')
+    create_midi(generated_music, 'static/music')
+
+if __name__ == '__main__':
+    create_music()
