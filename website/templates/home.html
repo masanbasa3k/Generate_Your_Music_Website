@@ -1,26 +1,61 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content %}
+{% extends "base.html" %}
+
+{% block title %}Generate Music{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Müzik Oluştur ve Çal</title>
+    <title>Generate Music</title>
+    <style>
+        body {
+            background-color: #5e4e99; 
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .button-container a {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>Web Müzik Oluştur ve Çal</h1>
+    <h1>Generate Your Own Music</h1>
 
-    <form action="/generate_music" method="POST">
-        <button type="submit">Generate Music</button>
-    </form>
+    <div class="button-container">
+        <form action="/generate_music" method="POST">
+            <button type="submit">Generate</button>
+        </form>
+        <a href="/download_music" target="_blank">Download</a>
+    </div>
 
     <br>
 
     <midi-player
-  src="static/music.mid"
-  sound-font visualizer="#myVisualizer">
-</midi-player>
-<midi-visualizer type="piano-roll" id="myVisualizer"></midi-visualizer>
-
-    <br>
-
-    <a href="/download_music" target="_blank">Download</a>
+        src="static/music.mid"
+        sound-font visualizer="#myVisualizer">
+    </midi-player>
+    <midi-visualizer type="piano-roll" id="myVisualizer"></midi-visualizer>
 </body>
-    {% endblock %}
+</html>
+{% endblock %}
