@@ -1,7 +1,3 @@
 flask
-fastapi
-Pillow
-python-multipart
 tensorflow
-uvicorn
 music21
